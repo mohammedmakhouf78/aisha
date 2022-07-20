@@ -18,7 +18,8 @@
 
                         <x-form.select-array name="day" :array="getLessonDay()" label="اختر ايام الحضور " :selected="old('day')" />
 
-                        <x-form.select-object name="group_id" label="اختر المجموعة" :collection="$groups" field="name" :selected="old('group_id')" />
+                        <x-form.select-object name="group_id" label="اختر المجموعة" :collection="$groups" field="name"
+                            :selected="old('group_id')" />
 
                         <x-form.time name="from" label="من" :value="old('from')" />
 
