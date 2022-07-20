@@ -15,23 +15,13 @@
                         @method('PUT')
 
 
+                        <x-form.select-object name="teacher_name" label="اختر المعلم" :collection="$teachers" field="name"
+                            :selected="$exam->id" />
+
+
                         <input type="hidden" name="exam_id" value="{{ $exam->id }}">
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <select class="form-control" name="teacher_name" id="teacher_name">
-                                    <option value="">اختر المعلم</option>
-                                    @foreach ($teachers as $teacher)
-                                        <option {{ $teacher->name == $exam->teacher ? 'selected' : '' }}
-                                            value="{{ $teacher->name }}">
-                                            {{ $teacher->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('teacher_name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+
+
 
 
                         <x-form.text name="title" label="العنوان" :value="$exam->title" />
