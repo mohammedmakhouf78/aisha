@@ -17,40 +17,11 @@
                         <x-form.text name="name" label="اسم المجموعة" :value="old('name')" />
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <select class="form-control" name="teacher_id" id="teacher_id">
-                                    <option value="">اختر المعلم</option>
-                                    @foreach ($teachers as $teacher)
-                                        <option {{ $teacher->id == old('teacher_id') ? 'selected' : '' }}
-                                            value="{{ $teacher->id }}">
-                                            {{ $teacher->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('teacher_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+                        <x-form.select-object name="teacher_id" label="اختر المعلم" :collection="$teachers" field="name"
+                            :selected="old('teacher_id')" />
+                        <x-form.select-array name="type" :array="getGroupTypes()" label="اختر النوع" :selected="old('type')" />
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <select class="form-control" name="type" id="type">
-                                    <option value="">اختر النوع</option>
-                                    @foreach (getGroupTypes() as $enType => $arType)
-                                        <option {{ $enType == old('type') ? 'selected' : '' }}
-                                            value="{{ $enType }}">
-                                            {{ $arType }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('type')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
 
                         <x-form.textarea name="note" label="ملاحظة" :value="old('note')" />
 

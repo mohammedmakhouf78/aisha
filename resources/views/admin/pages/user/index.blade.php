@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title">Data Table</strong>
-                    <a href="{{ route('user.create') }}" class="btn btn-primary">Create</a>
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Create</a>
                 </div>
                 <div class="card-body">
                     <div id="bootstrap-data-table_wrapper"
@@ -35,7 +35,7 @@
                                                 rowspan="1" colspan="1" style="width: 332px;"
                                                 aria-label="Position: activate to sort column ascending">
                                                 email</th>
-                                          {{-- <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
+                                            {{-- <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                                 rowspan="1" colspan="1" style="width: 148px;"
                                                 aria-label="Office: activate to sort column ascending">
                                                 password</th>
@@ -48,7 +48,7 @@
                                                 <td class="sorting_1">{{ ++$index }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                              {{--  <td>{{ $user->password }}</td>--}}
+                                                {{-- <td>{{ $user->password }}</td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
