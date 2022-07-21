@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Exam\ExamDeleteRequest;
+use App\Http\Requests\Exam\ExamStoreRequest;
+use App\Http\Requests\Exam\ExamUpdateRequest;
 use App\Models\Exam;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -25,16 +28,8 @@ class ExamController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ExamStoreRequest $request)
     {
-        $request->validate([
-            'teacher_name' => 'required|exists:teachers,name',
-            'title' => 'required|min:11',
-            'max_mark' => 'required|numeric',
-            'min_mark' => 'required|numeric',
-            'note' => 'nullable'
-        ]);
-
 
         Exam::create([
             'teacher' => $request->teacher_name,
@@ -58,20 +53,10 @@ class ExamController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(ExamUpdateRequest $request)
     {
-        $request->validate([
-            'teacher_name' => 'required|exists:teachers,name',
-            'title' => 'required|min:11',
-            'max_mark' => 'required|numeric',
-            'min_mark' => 'required|numeric',
-            'note' => 'nullable'
-        ]);
-
+    
         $exam = Exam::find($request->exam_id);
-
-
-
         $exam->update([
             'teacher' => $request->teacher_name,
             'title' => $request->title,
@@ -84,7 +69,7 @@ class ExamController extends Controller
         return redirect(route('admin.exam.index'));
     }
 
-    public function delete(Request $request)
+    public function delete(ExamDeleteRequest $request)
     {
 
         $exam = Exam::find($request->id);
