@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Http\Requests\User\UserDeleteRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\User;
-use Illuminate\Auth\Events\Validated;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -24,36 +25,45 @@ class UserController extends Controller
         return view('admin.pages.user.create');
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
-            'password' => [
-                'required',
-                'min:3',
-                'confirmed'
-            ],
-        ]);
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
-        return redirect(route("user.index"));
+        return redirect(route("admin.user.index"));
     }
 
-    public function edit()
+    public function edit(User $user)
     {
+
+        return view('admin.pages.user.edit', [
+            "user" => $user
+        ]);
     }
 
-    public function update()
+    public function update(UserUpdateRequest $request, User $user)
     {
+        $user->update(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]
+
+        );
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route("admin.user.index"));
     }
 
-    public function destroy()
+    public function delete(UserDeleteRequest $request, User $user)
     {
+
+
+        $user->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route("admin.user.index"));
     }
 }
