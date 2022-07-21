@@ -40,9 +40,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [PaymentsController::class, 'index'])->name('index');
         Route::get('/create', [PaymentsController::class, 'create'])->name('create');
         Route::post('/store', [PaymentsController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [PaymentsController::class, 'edit'])->name('edit');
-        Route::put('/update', [PaymentsController::class, 'update'])->name('update');
-        Route::delete('/delete', [PaymentsController::class, 'delete'])->name('delete');
+        Route::get('/edit/{payment}', [PaymentsController::class, 'edit'])->name('edit');
+        Route::put('/update/{payment}', [PaymentsController::class, 'update'])->name('update');
+        Route::delete('/delete/{payment}', [PaymentsController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'examstudent', 'as' => 'examstudent.'], function () {
