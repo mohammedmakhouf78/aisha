@@ -81,9 +81,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/', [GroupController::class, 'index'])->name('index');
         Route::get('/create', [GroupController::class, 'create'])->name('create');
         Route::post('/store', [GroupController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [GroupController::class, 'edit'])->name('edit');
-        Route::put('/update', [GroupController::class, 'update'])->name('update');
-        Route::delete('/delete', [GroupController::class, 'delete'])->name('delete');
+        Route::get('/edit/{group}', [GroupController::class, 'edit'])->name('edit');
+        Route::put('/update/{group}', [GroupController::class, 'update'])->name('update');
+        Route::delete('/delete/{group}', [GroupController::class, 'delete'])->name('delete');
     });
 
 
