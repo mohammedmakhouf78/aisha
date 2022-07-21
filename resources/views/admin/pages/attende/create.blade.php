@@ -14,69 +14,24 @@
                     <form action="{{ route('admin.attend.store') }}" method="post" class="form-horizontal">
                         @csrf
 
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <select class="form-control" name="student_id" id="student_id">
-                                    <option value="">اختر الطالب</option>
-                                    @foreach ($students as $student)
-                                        <option {{ $student->id == old('student_id') ? 'selected' : '' }}
-                                            value="{{ $student->id }}">
-                                            {{ $student->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('student_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <select class="form-control" name="lesson_id" id="lesson_id">
-                                    <option value=""> اختر الدرس</option>
-                                    @foreach ($lessons as $lesson)
-                                        <option {{ $lesson->id == old('lesson_id') ? 'selected' : '' }}
-                                            value="{{ $lesson->id }}">
-                                            {{ $lesson->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('lesson_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+
+                        <x-form.select-object name="student_id" label="اختر الطالب" :collection="$students" field="name"
+                            :selected="old('student_id')" />
+
+                        <x-form.select-object name="lesson_id" label="اختر الدرس" :collection="$lessons" field="name"
+                            :selected="old('lesson_id')" />
+
+                        <x-form.date name="date" label=" تاريخ" :value="old('date')" />
 
 
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <div class="input-group">
-                                    <div class="input-group-addon">تاريخ الميلاد</div>
-                                    <input type="date" id="date" name="date" class="form-control"
-                                        value="{{ old('date') }}">
-                                </div>
-                                @error('date')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+                        <x-form.checkbok name="attend" label="الحضور" />
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-6">
-                                <div class="input-group">
-                                    <div class="input-group-addon">الحضور</div>
-                                    <input class="mr-4" type="checkbox" id="attend" name="attend" value="1">
-                                </div>
-                                @error('attend')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+                        <x-form.textarea name="note" label="ملاحظة" :value="old('note')" />
 
 
 
@@ -84,19 +39,7 @@
 
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-12" style="text-align: right">
-                                <label>ملاحظة</label>
-                                <div class="input-group">
-                                    <textarea class="form-control" name="note" id="note" cols="30" rows="10">
-                                        
-                                    </textarea>
-                                </div>
-                                @error('note')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+
 
 
 
