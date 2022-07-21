@@ -14,7 +14,7 @@ class ExamStudentsController extends Controller
 {
     public function index()
     {
-        $examstudents = ExamStudent::orderBy('date', 'DESC')->get();
+        $examstudents = ExamStudent::orderBy('id', 'DESC')->get();
 
         return view('admin.pages.examstudent.index', [
             'examstudents' => $examstudents

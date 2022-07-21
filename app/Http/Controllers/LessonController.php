@@ -13,7 +13,7 @@ class LessonController extends Controller
     public function index()
     {
 
-        $lessons = Lesson::orderBy('group_id', 'DESC')->get();
+        $lessons = Lesson::orderBy('id', 'DESC')->get();
         return view('admin.pages.lessons.index', [
 
             "lessons"  => $lessons,

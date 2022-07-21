@@ -11,7 +11,7 @@ class ExamController extends Controller
 {
     public function index()
     {
-        $exams = Exam::orderBy('max_mark', 'DESC')->get();
+        $exams = Exam::orderBy('id', 'DESC')->get();
         return view('admin.pages.exam.index', [
             'exams' => $exams
         ]);
