@@ -14,7 +14,7 @@ class ExamStudentsController extends Controller
 {
     public function index()
     {
-        $examstudents = ExamStudent::get();
+        $examstudents = ExamStudent::orderBy('date', 'DESC')->get();
 
         return view('admin.pages.examstudent.index', [
             'examstudents' => $examstudents
@@ -74,7 +74,7 @@ class ExamStudentsController extends Controller
         return redirect(route('admin.examstudent.index'));
     }
 
-    public function delete(ExamStudentDeleteRequest $request,ExamStudent $examstudent)
+    public function delete(ExamStudentDeleteRequest $request, ExamStudent $examstudent)
     {
         $examstudent->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');

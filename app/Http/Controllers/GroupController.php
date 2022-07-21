@@ -13,7 +13,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::get();
+        $groups = Group::orderBy('type', 'DESC')->get();
 
         return view('admin.pages.group.index', [
             'groups' => $groups

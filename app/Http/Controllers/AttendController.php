@@ -13,7 +13,8 @@ class AttendController extends Controller
 
     public function index()
     {
-        $attends = Attend::get();
+
+        $attends = Attend::orderBy('date', 'DESC')->get();
 
         return view('admin.pages.attende.index', [
             'attends' => $attends

@@ -13,7 +13,7 @@ class LessonController extends Controller
     public function index()
     {
 
-        $lessons = Lesson::get();
+        $lessons = Lesson::orderBy('group_id', 'DESC')->get();
         return view('admin.pages.lessons.index', [
 
             "lessons"  => $lessons,
@@ -91,7 +91,7 @@ class LessonController extends Controller
 
     public function delete(Request $request)
     {
-       
+
         $request->validate([
             'id' => 'required|exists:lessons,id',
         ]);

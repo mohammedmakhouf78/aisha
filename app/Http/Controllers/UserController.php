@@ -13,8 +13,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::get();
-        return view('admin.pages.user.index',[
+        $users = User::orderBy('id', 'DESC')->get();
+        return view('admin.pages.user.index', [
             "users" => $users
         ]);
     }

@@ -12,7 +12,7 @@ class PaymentsController extends Controller
     public function index()
     {
 
-        $payments = Payment::get();
+        $payments = Payment::orderBy('id', 'DESC')->get();
         return view('admin.pages.Payment.index', [
             'payments' => $payments,
         ]);
@@ -31,23 +31,23 @@ class PaymentsController extends Controller
     {
 
         $request->validate([
-            
+
             'student_id' => 'required|exists:students,id',
             'payed'      => 'required',
             'month'      =>  'required',
             'onte'       => 'nullable'
-            
+
         ]);
-        
+
         Payment::create([
-            
+
             'student_id' => $request->student_id,
             'payed'      => $request->payed,
             'month'      => $request->month,
             'onte'       => $request->onte
-            
+
         ]);
-       
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.Payment.index'));
     }
@@ -66,30 +66,27 @@ class PaymentsController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'payments_id'=>'required|exists:payments,id',
+            'payments_id' => 'required|exists:payments,id',
             'student_id' => 'required|exists:students,id',
             'payed'      => 'required',
             'month'      =>  'required',
             'onte'       => 'nullable'
-            
+
         ]);
 
         $payments = Payment::find($request->payments_id);
-        
-      
+
+
         $payments->update([
             'student_id' => $request->student_id,
             'payed'      => $request->payed,
             'month'      => $request->month,
             'onte'       => $request->onte
-            
+
         ]);
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.Payment.index'));
-
-
-
     }
 
     public function delete(Request $request)
@@ -99,10 +96,10 @@ class PaymentsController extends Controller
         ]);
         $payment = Payment::find($request->id);
         $payment->delete();
-      
-        
+
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
-        
+
         return redirect()->back();
     }
 }

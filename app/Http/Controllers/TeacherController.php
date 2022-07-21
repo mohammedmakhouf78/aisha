@@ -10,9 +10,9 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = Teacher::get();
-       
-        return view('admin.pages.teacher.index',[
+        $teachers = Teacher::orderBy('id', 'DESC')->get();
+
+        return view('admin.pages.teacher.index', [
             'teachers' => $teachers,
         ]);
     }
@@ -44,7 +44,7 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $teachers = Teacher::find($id);
-        return view('admin.pages.teacher.edit',[
+        return view('admin.pages.teacher.edit', [
             'teacher'  => $teachers,
         ]);
     }
@@ -67,11 +67,9 @@ class TeacherController extends Controller
             'note' => $request->note,
         ]);
 
-        
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.teacher.index'));
-
-
     }
 
     public function delete(request $request)
@@ -80,8 +78,8 @@ class TeacherController extends Controller
         $request->validate([
             'id' => 'required|exists:teachers,id',
         ]);
-        
-        
+
+
         $teacher = Teacher::find($request->id);
         $teacher->delete();
 
