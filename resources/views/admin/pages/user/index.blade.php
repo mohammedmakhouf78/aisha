@@ -10,8 +10,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Data Table</strong>
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Create</a>
+                    <strong class="card-title">المستخدمين</strong>
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary float-right">Create</a>
                 </div>
                 <div class="card-body">
                     <div id="bootstrap-data-table_wrapper"
