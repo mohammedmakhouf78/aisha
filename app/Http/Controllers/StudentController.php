@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Student\StudentDeleteRequest;
+use App\Http\Requests\Student\StudentStoreRequest;
+use App\Http\Requests\Student\StudentUpdateRequest;
 use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -31,18 +34,9 @@ class StudentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StudentStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'brithday' => 'nullable|date',
-            'phone' => 'required|min:11',
-            'type' => 'required|in:' . getTypesInString(getStudentTypes()),
-            'note' => 'nullable',
-            'group_id' => 'required|exists:groups,id'
-        ]);
-
-
+    
         Student::create([
             'name' => $request->name,
             'brithday' => $request->brithday,
@@ -65,17 +59,8 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(StudentUpdateRequest $request)
     {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'name' => 'required|min:3',
-            'brithday' => 'nullable|date',
-            'phone' => 'required|min:11',
-            'type' => 'required|in:' . getTypesInString(getStudentTypes()),
-            'note' => 'nullable',
-            'group_id' => 'required|exists:groups,id'
-        ]);
 
 
         $student = Student::find($request->student_id);
@@ -93,14 +78,16 @@ class StudentController extends Controller
         return redirect(route('admin.student.index'));
     }
 
-    public function delete(Request $request)
+    public function delete(StudentDeleteRequest $request)
     {
-        $request->validate([
-            'id' => 'required|exists:students,id',
-        ]);
-
+       
         $student = Student::find($request->id);
         $student->delete();
+        dd("
+        
+        SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`aisha`.`exam_students`, CONSTRAINT `exam_students_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES
+        
+        ");
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
