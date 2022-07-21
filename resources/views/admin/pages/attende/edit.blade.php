@@ -11,7 +11,7 @@
                     الحضور
                 </div>
                 <div class="card-body card-block">
-                    <form action="{{ route('admin.attend.update') }}" method="post" class="form-horizontal">
+                    <form action="{{ route('admin.attend.update', $attend->id) }}" method="post" class="form-horizontal">
                         @csrf
                         @method('PUT')
 

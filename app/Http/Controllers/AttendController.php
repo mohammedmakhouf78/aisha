@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Attend\AttendDeleteRequest;
+use App\Http\Requests\Attend\AttendStoreRequest;
+use App\Http\Requests\Attend\AttendUpdateRequest;
 use App\Models\Attend;
 use App\Models\Lesson;
 use App\Models\Student;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AttendController extends Controller
@@ -33,15 +35,9 @@ class AttendController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(AttendStoreRequest $request)
     {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'lesson_id' => 'required|exists:lessons,id',
-            'date' => 'required',
-            'note' => 'nullable',
 
-        ]);
 
         Attend::create([
             'student_id' => $request->student_id,
@@ -54,9 +50,9 @@ class AttendController extends Controller
         return redirect()->back();
     }
 
-    public function edit($id)
+    public function edit(Attend $attend)
     {
-        $attend = Attend::find($id);
+
         $students  = Student::get();
         $lessons = Lesson::get();
 
@@ -70,17 +66,10 @@ class AttendController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(AttendUpdateRequest $request, Attend $attend)
     {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'lesson_id' => 'required|exists:lessons,id',
-            'date' => 'required',
-            'note' => 'nullable',
 
-        ]);
 
-        $attend = Attend::find($request->attend_id);
         $attend->update([
             'student_id' => $request->student_id,
             'lesson_id' =>  $request->lesson_id,
@@ -92,9 +81,9 @@ class AttendController extends Controller
         return redirect(route('admin.attend.index'));
     }
 
-    public function delete(Request $request)
+    public function delete(AttendDeleteRequest $request, Attend $attend)
     {
-        $attend = Attend::find($request->id);
+
 
         $attend->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');

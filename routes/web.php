@@ -61,9 +61,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [AttendController::class, 'index'])->name('index');
         Route::get('create', [AttendController::class, 'create'])->name('create');
         Route::post('store', [AttendController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [AttendController::class, 'edit'])->name('edit');
-        Route::put('update', [AttendController::class, 'update'])->name('update');
-        Route::delete('delete', [AttendController::class, 'delete'])->name('delete');
+        Route::get('edit/{attend}', [AttendController::class, 'edit'])->name('edit');
+        Route::put('update/{attend}', [AttendController::class, 'update'])->name('update');
+        Route::delete('delete/{attend}', [AttendController::class, 'delete'])->name('delete');
     });
 
 
