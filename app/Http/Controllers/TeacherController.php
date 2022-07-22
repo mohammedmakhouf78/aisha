@@ -37,18 +37,15 @@ class TeacherController extends Controller
         return redirect(route('admin.teacher.index'));
     }
 
-    public function edit($id)
+    public function edit(Teacher $teacher)
     {
-        $teachers = Teacher::find($id);
         return view('admin.pages.teacher.edit',[
-            'teacher'  => $teachers,
+            'teacher'  => $teacher,
         ]);
     }
 
-    public function update(TeacherUpdateRequest $request)
+    public function update(TeacherUpdateRequest $request,Teacher $teacher)
     {
-
-        $teacher = Teacher::find($request->teacher_id);
         $teacher->update([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -63,9 +60,9 @@ class TeacherController extends Controller
 
     }
 
-    public function delete(TeacherDeleteRequest $request)
+    public function delete(TeacherDeleteRequest $request , Teacher $teacher)
     {
-        $teacher = Teacher::find($request->id);
+
         $teacher->delete();
         
         Alert::success('نجاح', 'تمت العملية بنجاح');

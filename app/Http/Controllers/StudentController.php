@@ -49,22 +49,18 @@ class StudentController extends Controller
         return redirect(route('admin.student.index'));
     }
 
-    public function edit($id)
+    public function edit(Student $student)
     {
         $groups = Group::get();
-        $student = Student::find($id);
+        
         return view('admin.pages.student.edit', [
             'groups' => $groups,
             'student' => $student
         ]);
     }
 
-    public function update(StudentUpdateRequest $request)
+    public function update(StudentUpdateRequest $request ,Student $student)
     {
-
-
-        $student = Student::find($request->student_id);
-
         $student->update([
             'name' => $request->name,
             'brithday' => $request->brithday,
@@ -78,10 +74,9 @@ class StudentController extends Controller
         return redirect(route('admin.student.index'));
     }
 
-    public function delete(StudentDeleteRequest $request)
+    public function delete(StudentDeleteRequest $request ,Student $student)
     {
        
-        $student = Student::find($request->id);
         $student->delete();
         dd("
         

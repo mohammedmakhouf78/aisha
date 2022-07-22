@@ -72,7 +72,7 @@
                                                         
                                                 </td>
                                                 <td>
-                                                    <x-action.delete :value="$lesson->id" :route="route('admin.lesson.delete')" />
+                                                    <x-action.delete :value="$lesson->id" :route="route('admin.lesson.delete',$lesson->id)" />
                                                 </td>
                                             </tr>
                                         @endforeach

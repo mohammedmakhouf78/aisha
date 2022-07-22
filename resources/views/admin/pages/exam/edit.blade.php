@@ -10,7 +10,7 @@
                 <div class="card-header bg-primary text-light" style="text-align: right">
                     الاختبار </div>
                 <div class="card-body card-block">
-                    <form action="{{ route('admin.exam.update') }}" method="post" class="form-horizontal">
+                    <form action="{{ route('admin.exam.update',$exam->id) }}" method="post" class="form-horizontal">
                         @csrf
                         @method('PUT')
 

@@ -43,9 +43,9 @@ class ExamController extends Controller
         return redirect(route('admin.exam.index'));
     }
 
-    public function edit($id)
+    public function edit(Exam $exam)
     {
-        $exam = Exam::find($id);
+       
         $teachers = Teacher::get();
         return view('admin.pages.exam.edit', [
             'teachers' => $teachers,
@@ -53,10 +53,9 @@ class ExamController extends Controller
         ]);
     }
 
-    public function update(ExamUpdateRequest $request)
+    public function update(ExamUpdateRequest $request , Exam $exam)
     {
     
-        $exam = Exam::find($request->exam_id);
         $exam->update([
             'teacher' => $request->teacher_name,
             'title' => $request->title,
@@ -69,10 +68,10 @@ class ExamController extends Controller
         return redirect(route('admin.exam.index'));
     }
 
-    public function delete(ExamDeleteRequest $request)
+    public function delete(ExamDeleteRequest $request , Exam $exam)
     {
 
-        $exam = Exam::find($request->id);
+       
 
         $exam->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');

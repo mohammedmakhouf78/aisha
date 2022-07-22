@@ -49,23 +49,23 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    public function edit($id)
+    public function edit(Lesson $lesson )
     {
 
         $groups = Group::get();
-        $lessons = Lesson::find($id);
+        
         return view('admin.pages.lessons.edit', [
             'groups' => $groups,
-            'lessons' => $lessons
+            'lessons' => $lesson
         ]);
     }
 
-    public function update(LessonUpdateRequest $request)
+    public function update(LessonUpdateRequest $request ,Lesson $lesson)
     {
        
-        $lessons = Lesson::find($request->lessons_id);
+      
 
-        $lessons->update([
+        $lesson->update([
             'day' =>  $request->day,
             'group_id' => $request->group_id,
             'from' => $request->from,
@@ -78,11 +78,9 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    public function delete(LessonDeleteRequest $request)
+    public function delete(LessonDeleteRequest $request ,Lesson $lesson)
     {
-       
-        $lessons = Lesson::find($request->id);
-        $lessons->delete();
+        $lesson->delete();
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
