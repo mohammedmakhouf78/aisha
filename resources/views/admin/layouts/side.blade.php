@@ -21,39 +21,39 @@
                                           <ul class="sub-menu children dropdown-menu">
                               @endif
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
                                                 <a href="{{route('admin.teacher.index')}}" class="{{request()->route()->getName() == "admin.teacher.index" ? "text-primary" : ''}}">المُعلِّمين</a>
+                                                <i class="fas fa-chalkboard-teacher"></i>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-user-graduate"></i>
                                                 <a href="{{route('admin.student.index')}}">الطلاب</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-user"></i>
                                                 <a href="{{route('admin.user.index')}}">المستخدمين</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-users"></i>
                                                 <a href="{{route('admin.group.index')}}">المجموعات</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-file"></i>
                                                 <a href="{{route('admin.exam.index')}}">الاختبارات</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-clipboard-user"></i>
                                                 <a href="{{route('admin.attend.index')}}">الحضور</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-file-invoice-dollar"></i>
                                                 <a href="{{route('admin.Payment.index')}}">المدفوعات</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-headphones-alt"></i>
                                                 <a href="{{route('admin.examstudent.index')}}">إختبارات الطلاب</a>
                                           </li>
                                           <li>
-                                                <i class="fa fa-puzzle-piece"></i>
+                                                <i class="fas fa-book-reader"></i>
                                                 <a href="{{route('admin.lesson.index')}}"> الدروس</a>
                                           </li>
                                     </ul>
