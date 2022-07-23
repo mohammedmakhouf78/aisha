@@ -79,7 +79,7 @@
                                                     <x-action.edit :route="route('admin.student.edit',$student->id)" />
                                                 </td>
                                                 <td>
-                                                    <x-action.delete :value="$student->id" :route="route('admin.student.delete')" />
+                                                    <x-action.delete :value="$student->id" :route="route('admin.student.delete',$student->id)" />
                                                 </td>
                                             </tr>
                                         @endforeach

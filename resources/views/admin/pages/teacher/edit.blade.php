@@ -12,7 +12,7 @@
                     تعديل المعلم
                 </div>
                 <div class="card-body card-block">
-                    <form action="{{ route('admin.teacher.update') }}" method="post" class="form-horizontal">
+                    <form action="{{ route('admin.teacher.update', $teacher->id ) }}" method="post" class="form-horizontal">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">

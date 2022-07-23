@@ -4,7 +4,7 @@ namespace App\Http\Requests\Teacher;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TeacherStoreRequest extends FormRequest
+class TeacherDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,12 @@ class TeacherStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
-            'phone' => 'required|min:11',
-            'birthday' => 'nullable|date',
-            'note' => 'nullable'
+            'id' => 'required|exists:teachers,id',
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'name.required'  => 'هذه الخانة مطلوبة',
-            'phone.required' => 'هذه الخانة مطلوبة'
-        ];
-    }
+    
 }
+
+
+

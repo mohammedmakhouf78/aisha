@@ -11,7 +11,7 @@
                   تعديل طالب
                 </div>
                 <div class="card-body card-block">
-                    <form action="{{ route('admin.student.update') }}" method="post" class="form-horizontal">
+                    <form action="{{ route('admin.student.update',$student->id) }}" method="post" class="form-horizontal">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="student_id" value="{{$student->id}}">

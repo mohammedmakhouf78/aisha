@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Teacher\TeacherDeleteRequest;
+use App\Http\Requests\Teacher\TeacherStoreRequest;
+use App\Http\Requests\Teacher\TeacherUpdateRequest;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,15 +25,8 @@ class TeacherController extends Controller
         return view('admin.pages.teacher.create');
     }
 
-    public function store(Request $request)
+    public function store(TeacherStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'phone' => 'required|min:11',
-            'birthday' => 'nullable|date',
-            'note' => 'nullable'
-        ]);
-
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -41,25 +37,15 @@ class TeacherController extends Controller
         return redirect(route('admin.teacher.index'));
     }
 
-    public function edit($id)
+    public function edit(Teacher $teacher)
     {
-        $teachers = Teacher::find($id);
         return view('admin.pages.teacher.edit', [
-            'teacher'  => $teachers,
+            'teacher'  => $teacher,
         ]);
     }
 
-    public function update(Request $request)
+    public function update(TeacherUpdateRequest $request, Teacher $teacher)
     {
-
-        $request->validate([
-            'name' => 'required|min:3',
-            'phone' => 'required|min:11',
-            'birthday' => 'nullable|date',
-            'note' => 'nullable'
-        ]);
-
-        $teacher = Teacher::find($request->teacher_id);
         $teacher->update([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -72,15 +58,9 @@ class TeacherController extends Controller
         return redirect(route('admin.teacher.index'));
     }
 
-    public function delete(request $request)
+    public function delete(TeacherDeleteRequest $request, Teacher $teacher)
     {
 
-        $request->validate([
-            'id' => 'required|exists:teachers,id',
-        ]);
-
-
-        $teacher = Teacher::find($request->id);
         $teacher->delete();
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
