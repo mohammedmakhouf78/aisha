@@ -4,6 +4,7 @@
             <div class="input-group-addon">{{ $label }}</div>
             <input type="date" id="{{ $id }}" name="{{ $name }}" class="form-control"
                 value="{{ $value }}">
+               
         </div>
         @error($name)
             <p class="text-danger">{{ $message }}</p>
