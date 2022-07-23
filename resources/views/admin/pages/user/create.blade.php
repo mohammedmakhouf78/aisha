@@ -16,7 +16,7 @@
 
                         <x-form.text name="name" label="الإسم" :value="old('name')" />
 
-                        <x-form.email name="email" label="البريد الالكتروني" :value="old('email')" />
+                        <x-form.email name="email" label="البريد الالكتروني" :value="old('email')" id="email" />
 
                         <x-form.password name="password" label="كلمه السر" />
 

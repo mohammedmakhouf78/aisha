@@ -2,8 +2,8 @@
     <div class="col col-md-12">
           <div class="input-group">
                 <div class="input-group-addon">{{ $label }}</div>
-                <input type="password" id="{{ $id }}" name="{{ $name }}"
-                      class="form-control"  value="{{ $value }}">
+                <input type="password" id="{{ $id ?? "" }}" name="{{ $name }}"
+                      class="form-control"  value="{{ $value ?? '' }}">
                       <span class="asterisx">*</span>
           </div>
           @error($name)

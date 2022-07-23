@@ -80,24 +80,7 @@
             height: 160px;
         }
 
-        .asterisx {
-            float: right;
-            height: 0;
-            font-size: 33px;
-            color: #b90d0d;
-            position: absolute;
-            left: 16px;
-            top: 0px;
-        }
-        .OPasterisx .asterisx{
-            float: right;
-            height: 0;
-            font-size: 33px;
-            color: #b90d0d;
-            position: absolute;
-            left: 16px;
-            top: 0px;
-        }
+        
     </style>
 
     @yield('css')

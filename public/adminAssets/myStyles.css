@@ -5,3 +5,15 @@
 .subtitle{
     display: none !important;
 }
+
+.label-astersc{
+    position: relative;
+}
+.asterisx {
+    height: 0;
+    font-size: 1em;
+    color: #b90d0d;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+}
