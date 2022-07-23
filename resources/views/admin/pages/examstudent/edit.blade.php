@@ -1,15 +1,19 @@
-@include('admin.layouts.head')
+@extends('admin.master')
 
-@include('admin.layouts.side')
-<!-- Right Panel -->
-<div id="right-panel" class="right-panel">
+@section('css')
+@endsection
 
-      @include('admin.layouts.nav')
-      <!-- Content -->
-      <div class="content">
-            <!-- Animated -->
-            <div class="animated fadeIn">
-                  <form action="{{ route('admin.examstudent.update', $examstudents->id) }}" method="post" class="form-horizontal">
+@section('content')
+    <div class="row" style="direction: rtl;text-align:right">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary text-light" style="text-align: right">
+                    تعديل اختبار الطالب
+                </div>
+                <div class="card-body card-block">
+
+                    <form action="{{ route('admin.examstudent.update', $examstudents->id) }}" method="post"
+                        class="form-horizontal">
                         @csrf
                         @method('PUT')
 
@@ -17,12 +21,12 @@
 
 
                         <x-form.select-object name="exam_id" label="اختر الامتحان" :collection="$exams" field="title"
-                              :selected="$examstudents->exam_id" />
+                            :selected="$examstudents->exam_id" />
 
                         <x-form.select-object name="student_id" label="اختر الطالب" :collection="$students" field="name"
-                              :selected="$examstudents->student_id" />
+                            :selected="$examstudents->student_id" />
 
-                        <x-form.text name="memorized" label="memorized" :value="$examstudents->memorized" />
+                        <x-form.text name="memorized" label="الحفظ" :value="$examstudents->memorized" />
 
 
                         <x-form.number name="degree" label="الدرجة" :value="$examstudents->degree" />
@@ -35,13 +39,19 @@
                         <x-form.textarea name="note" label="ملاحظة" :value="$examstudents->note" />
 
                         <div class="m-3">
-                              <button type="submit" class="btn btn-success float-right">
-                                    Submit
-                              </button>
+                            <button type="submit" class="btn btn-success float-right">
+                                Submit
+                            </button>
                         </div>
-                  </form>
+                    </form>
+
+                </div>
+
             </div>
-            <!-- .animated -->
-      </div>
-</div>
-      @include('admin.layouts.footer')
+        </div>
+    </div>
+@endsection
+
+
+@section('javascript')
+@endsection
