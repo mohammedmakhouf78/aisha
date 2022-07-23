@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Lesson\LessonDeleteRequest;
+use App\Http\Requests\Lesson\LessonStoreRequest;
+use App\Http\Requests\Lesson\LessonUpdateRequest;
 use App\Models\Group;
 use App\Models\Lesson;
 use Dotenv\Parser\Lexer;
@@ -30,16 +33,9 @@ class LessonController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(LessonStoreRequest $request)
     {
 
-        $request->validate([
-            'day' => 'required|in:' . getTypesInString(getLessonDay()),
-            'group_id' => 'required|exists:groups,id',
-            'from' => 'required',
-            'to' => 'required',
-            'note' => 'nullable',
-        ]);
 
         Lesson::create([
 
@@ -53,30 +49,23 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    public function edit($id)
+    public function edit(Lesson $lesson )
     {
 
         $groups = Group::get();
-        $lessons = Lesson::find($id);
+        
         return view('admin.pages.lessons.edit', [
             'groups' => $groups,
-            'lessons' => $lessons
+            'lessons' => $lesson
         ]);
     }
 
-    public function update(Request $request)
+    public function update(LessonUpdateRequest $request ,Lesson $lesson)
     {
-        $request->validate([
-            'day' => 'required|in:' . getTypesInString(getLessonDay()),
-            'group_id' => 'required|exists:groups,id',
-            'from' => 'required',
-            'to' => 'required',
-            'note' => 'nullable',
-        ]);
+       
+      
 
-        $lessons = Lesson::find($request->lessons_id);
-
-        $lessons->update([
+        $lesson->update([
             'day' =>  $request->day,
             'group_id' => $request->group_id,
             'from' => $request->from,
@@ -89,15 +78,9 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    public function delete(Request $request)
+    public function delete(LessonDeleteRequest $request ,Lesson $lesson)
     {
-       
-        $request->validate([
-            'id' => 'required|exists:lessons,id',
-        ]);
-
-        $lessons = Lesson::find($request->id);
-        $lessons->delete();
+        $lesson->delete();
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
