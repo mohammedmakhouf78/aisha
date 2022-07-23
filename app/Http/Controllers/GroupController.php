@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Group\GroupDeleteRequest;
+use App\Http\Requests\Group\GroupStoreRequest;
+use App\Http\Requests\Group\GroupUpdateRequest;
 use App\Models\Group;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -13,7 +16,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::get();
+        $groups = Group::orderBy('id', 'DESC')->get();
 
         return view('admin.pages.group.index', [
             'groups' => $groups
@@ -28,16 +31,8 @@ class GroupController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(GroupStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'teacher_id' => 'required|exists:teachers,id',
-            'type' => 'required|in:kids,mid,mom',
-            'note' => 'nullable'
-        ]);
-
-
         Group::create([
             'teacher_id' => $request->teacher_id,
             'name' => $request->name,
@@ -49,29 +44,18 @@ class GroupController extends Controller
         return redirect(route('admin.group.index'));
     }
 
-    public function edit($id)
+    public function edit(Group $group)
     {
-
-        $groups = Group::find($id);
         $teachers = Teacher::get();
 
         return view('admin.pages.group.edit', [
             'teachers' => $teachers,
-            'groups' => $groups
+            'group' => $group
         ]);
     }
 
-    public function update(Request $request)
+    public function update(GroupUpdateRequest $request, Group $group)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'teacher_id' => 'required|exists:teachers,id',
-            'type' => 'required|in:kids,mid,mom',
-            'note' => 'nullable'
-        ]);
-
-        $group = Group::find($request->group_id);
-
 
         $group->update([
             'teacher_id' => $request->teacher_id,
@@ -84,15 +68,8 @@ class GroupController extends Controller
         return redirect(route('admin.group.index'));
     }
 
-    public function delete(Request $request)
+    public function delete(GroupDeleteRequest $request, Group $group)
     {
-
-        $request->validate([
-            'id' => 'required|exists:groups,id'
-
-        ]);
-
-        $group = Group::find($request->id);
 
         $group->delete();
 

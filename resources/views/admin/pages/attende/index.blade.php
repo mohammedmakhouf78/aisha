@@ -78,7 +78,7 @@
                                                     <x-action.edit :route="route('admin.attend.edit', $attend->id)" />
                                                 </td>
                                                 <td>
-                                                    <x-action.delete :value="$attend->id" :route="route('admin.attend.delete')" />
+                                                    <x-action.delete :value="$attend->id" :route="route('admin.attend.delete', $attend->id)" />
                                                 </td>
 
                                             </tr>

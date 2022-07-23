@@ -65,7 +65,7 @@
                                                     <x-action.edit :route="route('admin.group.edit', $group->id)" />
                                                 </td>
                                                 <td>
-                                                    <x-action.delete :value="$group->id" :route="route('admin.group.delete')" />
+                                                    <x-action.delete :value="$group->id" :route="route('admin.group.delete', $group->id)" />
                                                 </td>
                                             </tr>
                                         @endforeach

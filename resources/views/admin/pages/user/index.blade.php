@@ -10,8 +10,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Data Table</strong>
-                    <a href="{{ route('user.create') }}" class="btn btn-primary">Create</a>
+                    <strong class="card-title">المستخدمين</strong>
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary float-right">Create</a>
                 </div>
                 <div class="card-body">
                     <div id="bootstrap-data-table_wrapper"
@@ -35,11 +35,15 @@
                                                 rowspan="1" colspan="1" style="width: 332px;"
                                                 aria-label="Position: activate to sort column ascending">
                                                 email</th>
-                                          {{-- <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
+                                            <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                                 rowspan="1" colspan="1" style="width: 148px;"
                                                 aria-label="Office: activate to sort column ascending">
-                                                password</th>
-                                        </tr> --}}
+                                                Edit</th>
+                                            <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
+                                                rowspan="1" colspan="1" style="width: 148px;"
+                                                aria-label="Office: activate to sort column ascending">
+                                                Delete</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($users as $index => $user)
@@ -48,7 +52,13 @@
                                                 <td class="sorting_1">{{ ++$index }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                              {{--  <td>{{ $user->password }}</td>--}}
+
+                                                <td>
+                                                    <x-action.edit :route="route('admin.user.edit', $user->id)" />
+                                                </td>
+                                                <td>
+                                                    <x-action.delete :value="$user->id" :route="route('admin.user.delete', $user->id)" />
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

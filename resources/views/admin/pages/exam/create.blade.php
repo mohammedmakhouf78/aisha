@@ -14,22 +14,9 @@
                         @csrf
 
 
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <select class="form-control" name="teacher_name" id="teacher_name">
-                                    <option value="">اختر المعلم</option>
-                                    @foreach ($teachers as $teacher)
-                                        <option {{ $teacher->name == old('teacher_name') ? 'selected' : '' }}
-                                            value="{{ $teacher->name }}">
-                                            {{ $teacher->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('teacher_name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+                        <x-form.select-object name="teacher_name" label="اختر المعلم" :collection="$teachers" field="name"
+                            :selected="old('teacher_name')" />
+
 
 
                         <x-form.text name="title" label="العنوان" :value="old('title')" />

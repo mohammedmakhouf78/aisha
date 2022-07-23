@@ -40,9 +40,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [PaymentsController::class, 'index'])->name('index');
         Route::get('/create', [PaymentsController::class, 'create'])->name('create');
         Route::post('/store', [PaymentsController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [PaymentsController::class, 'edit'])->name('edit');
-        Route::put('/update', [PaymentsController::class, 'update'])->name('update');
-        Route::delete('/delete', [PaymentsController::class, 'delete'])->name('delete');
+        Route::get('/edit/{payment}', [PaymentsController::class, 'edit'])->name('edit');
+        Route::put('/update/{payment}', [PaymentsController::class, 'update'])->name('update');
+        Route::delete('/delete/{payment}', [PaymentsController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'examstudent', 'as' => 'examstudent.'], function () {
@@ -61,9 +61,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [AttendController::class, 'index'])->name('index');
         Route::get('create', [AttendController::class, 'create'])->name('create');
         Route::post('store', [AttendController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [AttendController::class, 'edit'])->name('edit');
-        Route::put('update', [AttendController::class, 'update'])->name('update');
-        Route::delete('delete', [AttendController::class, 'delete'])->name('delete');
+        Route::get('edit/{attend}', [AttendController::class, 'edit'])->name('edit');
+        Route::put('update/{attend}', [AttendController::class, 'update'])->name('update');
+        Route::delete('delete/{attend}', [AttendController::class, 'delete'])->name('delete');
     });
 
 
@@ -81,9 +81,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/', [GroupController::class, 'index'])->name('index');
         Route::get('/create', [GroupController::class, 'create'])->name('create');
         Route::post('/store', [GroupController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [GroupController::class, 'edit'])->name('edit');
-        Route::put('/update', [GroupController::class, 'update'])->name('update');
-        Route::delete('/delete', [GroupController::class, 'delete'])->name('delete');
+        Route::get('/edit/{group}', [GroupController::class, 'edit'])->name('edit');
+        Route::put('/update/{group}', [GroupController::class, 'update'])->name('update');
+        Route::delete('/delete/{group}', [GroupController::class, 'delete'])->name('delete');
     });
 
 
@@ -109,8 +109,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [UserController::class, 'index'])->name('index');
         Route::get('create', [UserController::class, 'create'])->name('create');
         Route::post('store', [UserController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::put('update', [UserController::class, 'update'])->name('update');
-        Route::delete('delete', [UserController::class, 'delete'])->name('delete');
+        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::put('update/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('delete/{user}', [UserController::class, 'delete'])->name('delete');
     });
 });

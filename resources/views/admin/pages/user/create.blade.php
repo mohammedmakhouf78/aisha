@@ -11,14 +11,14 @@
                     إضافة مستخدم
                 </div>
                 <div class="card-body card-block">
-                    <form action="{{ route('user.store') }}" method="post" class="form-horizontal">
+                    <form action="{{ route('admin.user.store') }}" method="post" class="form-horizontal">
                         @csrf
 
                         <x-form.text name="name" label="الإسم" :value="old('name')" />
 
                         <x-form.email name="email" label="البريد الالكتروني" :value="old('email')" />
 
-                        <x-form.password name="password" label="كلمه السر"  />
+                        <x-form.password name="password" label="كلمه السر" />
 
                         <x-form.password name="password_confirmation" label="اعد كتابه كلمه السر" />
 

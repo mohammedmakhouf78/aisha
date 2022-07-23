@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Payments\PaymentsDeleteRequest;
+use App\Http\Requests\Payments\PaymentsStoreRequest;
+use App\Http\Requests\Payments\PaymentsUpdateRequest;
 use App\Models\Payment;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -12,7 +15,7 @@ class PaymentsController extends Controller
     public function index()
     {
 
-        $payments = Payment::get();
+        $payments = Payment::orderBy('id', 'DESC')->get();
         return view('admin.pages.Payment.index', [
             'payments' => $payments,
         ]);
@@ -27,82 +30,60 @@ class PaymentsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(PaymentsStoreRequest $request)
     {
 
-        $request->validate([
-            
-            'student_id' => 'required|exists:students,id',
-            'payed'      => 'required',
-            'month'      =>  'required',
-            'onte'       => 'nullable'
-            
-        ]);
-        
         Payment::create([
-            
+
             'student_id' => $request->student_id,
             'payed'      => $request->payed,
             'month'      => $request->month,
             'onte'       => $request->onte
-            
+
         ]);
-       
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.Payment.index'));
     }
 
-    public function edit($id)
+    public function edit(Payment $payment)
     {
         $students = Student::get();
-        $payment  = Payment::find($id);
+
         return view('admin.pages.Payment.edit', [
             'students' => $students,
-            'payments' => $payment
+            'payment' => $payment
 
         ]);
     }
 
-    public function update(Request $request)
+    public function update(PaymentsUpdateRequest $request, Payment $payment)
     {
-        $request->validate([
-            'payments_id'=>'required|exists:payments,id',
-            'student_id' => 'required|exists:students,id',
-            'payed'      => 'required',
-            'month'      =>  'required',
-            'onte'       => 'nullable'
-            
-        ]);
 
-        $payments = Payment::find($request->payments_id);
-        
-      
-        $payments->update([
+
+
+
+
+        $payment->update([
             'student_id' => $request->student_id,
             'payed'      => $request->payed,
             'month'      => $request->month,
             'onte'       => $request->onte
-            
+
         ]);
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.Payment.index'));
-
-
-
     }
 
-    public function delete(Request $request)
+    public function delete(PaymentsDeleteRequest $request, Payment $payment)
     {
-        $request->validate([
-            'id' => 'required|exists:payments,id'
-        ]);
-        $payment = Payment::find($request->id);
+
         $payment->delete();
-      
-        
+
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
-        
+
         return redirect()->back();
     }
 }

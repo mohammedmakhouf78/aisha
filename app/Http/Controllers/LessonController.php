@@ -16,7 +16,7 @@ class LessonController extends Controller
     public function index()
     {
 
-        $lessons = Lesson::get();
+        $lessons = Lesson::orderBy('id', 'DESC')->get();
         return view('admin.pages.lessons.index', [
 
             "lessons"  => $lessons,
@@ -49,21 +49,21 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    public function edit(Lesson $lesson )
+    public function edit(Lesson $lesson)
     {
 
         $groups = Group::get();
-        
+
         return view('admin.pages.lessons.edit', [
             'groups' => $groups,
             'lessons' => $lesson
         ]);
     }
 
-    public function update(LessonUpdateRequest $request ,Lesson $lesson)
+    public function update(LessonUpdateRequest $request, Lesson $lesson)
     {
-       
-      
+
+
 
         $lesson->update([
             'day' =>  $request->day,
@@ -78,7 +78,7 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    public function delete(LessonDeleteRequest $request ,Lesson $lesson)
+    public function delete(LessonDeleteRequest $request, Lesson $lesson)
     {
         $lesson->delete();
 
