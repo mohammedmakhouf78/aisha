@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Exam\ExamDeleteRequest;
 use App\Http\Requests\Exam\ExamStoreRequest;
 use App\Http\Requests\Exam\ExamUpdateRequest;
+use App\Http\Traits\ExamTrait;
+use App\Http\Traits\TeacherTrait;
 use App\Models\Exam;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -12,9 +14,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ExamController extends Controller
 {
+use ExamTrait;
+use TeacherTrait;
+
+
+
     public function index()
     {
-        $exams = Exam::orderBy('id', 'DESC')->get();
+        $exams = $this->getExamsDesc();
         return view('admin.pages.exam.index', [
             'exams' => $exams
         ]);
@@ -22,7 +29,7 @@ class ExamController extends Controller
 
     public function create()
     {
-        $teachers = Teacher::get();
+        $teachers = $this-> getTeachers();
         return view('admin.pages.exam.create', [
             'teachers' => $teachers
         ]);
@@ -46,7 +53,7 @@ class ExamController extends Controller
     public function edit(Exam $exam)
     {
        
-        $teachers = Teacher::get();
+        $teachers = $this->getTeachers();
         return view('admin.pages.exam.edit', [
             'teachers' => $teachers,
             'exam' => $exam
