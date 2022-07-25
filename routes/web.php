@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExamStudentsController;
 use App\Http\Controllers\PaymentsController;
@@ -22,10 +23,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin/master');
-});
+
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'middleware' => 'auth'], function () {
+
+    Route::get('/', function () {
+        return view('admin/master');
+    })->name('home');
+
+
+
+
 
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.'], function () {
         Route::get('', [TeacherController::class, 'index'])->name('index');
