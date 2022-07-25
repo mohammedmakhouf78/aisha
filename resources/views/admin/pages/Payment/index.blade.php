@@ -7,11 +7,12 @@
 @section('content')
     <div class="row">
 
+
         <div class="col-md-12">
             <div class="card">
-                <a href="{{ route('admin.Payment.create') }}" class="btn btn-primary">إضافه دفع</a>
                 <div class="card-header">
-                    <strong class="card-title">بيانات المدفوعات</strong>
+                    <strong class="card-title"> بيانات المدفوعات</strong>
+                    <a href="{{ route('admin.Payment.create') }}" class="btn btn-primary float-right">Create</a>
                 </div>
                 <div class="card-body">
                     <div id="bootstrap-data-table_wrapper"
