@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Teacher\TeacherDeleteRequest;
 use App\Http\Requests\Teacher\TeacherStoreRequest;
 use App\Http\Requests\Teacher\TeacherUpdateRequest;
+use App\Http\Traits\TeacherTrait;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
+
+    use TeacherTrait;
+
     public function index()
     {
-        $teachers = Teacher::orderBy('id', 'DESC')->get();
+        $teachers = $this->getTeachersDesc();
 
         return view('admin.pages.teacher.index', [
             'teachers' => $teachers,
@@ -38,7 +42,7 @@ class TeacherController extends Controller
     }
 
     public function edit(Teacher $teacher)
-    {
+    {  
         return view('admin.pages.teacher.edit', [
             'teacher'  => $teacher,
         ]);
