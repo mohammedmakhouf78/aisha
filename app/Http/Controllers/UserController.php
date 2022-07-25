@@ -6,15 +6,16 @@ use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserDeleteRequest;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Http\Traits\UserTrait;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    use UserTrait;
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->get();
+        $users = $this->getUsersDesc();
         return view('admin.pages.user.index', [
             "users" => $users
         ]);

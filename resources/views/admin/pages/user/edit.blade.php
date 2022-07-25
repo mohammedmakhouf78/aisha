@@ -13,6 +13,7 @@
                 <div class="card-body card-block">
                     <form action="{{ route('admin.user.update', $user->id) }}" method="post" class="form-horizontal">
                         @csrf
+                        @method('PUT')
 
                         <x-form.text name="name" label="الإسم" :value="$user->name" />
 

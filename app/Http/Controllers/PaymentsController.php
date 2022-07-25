@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Payments\PaymentsDeleteRequest;
 use App\Http\Requests\Payments\PaymentsStoreRequest;
 use App\Http\Requests\Payments\PaymentsUpdateRequest;
+use App\Http\Traits\PaymentTrait;
+use App\Http\Traits\StudentTrait;
 use App\Models\Payment;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -12,10 +14,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentsController extends Controller
 {
+
+    use PaymentTrait;
+    use StudentTrait;
+
     public function index()
     {
 
-        $payments = Payment::orderBy('id', 'DESC')->get();
+        $payments = $this->getPaymentsDesc();
         return view('admin.pages.Payment.index', [
             'payments' => $payments,
         ]);
@@ -24,7 +30,7 @@ class PaymentsController extends Controller
     public function create()
     {
 
-        $students = Student::get();
+        $students = $this->getStudents();
         return view('admin.pages.Payment.create', [
             'students' => $students,
         ]);
@@ -48,7 +54,7 @@ class PaymentsController extends Controller
 
     public function edit(Payment $payment)
     {
-        $students = Student::get();
+        $students = $this->getStudents();
 
         return view('admin.pages.Payment.edit', [
             'students' => $students,

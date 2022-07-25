@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Group\GroupDeleteRequest;
 use App\Http\Requests\Group\GroupStoreRequest;
 use App\Http\Requests\Group\GroupUpdateRequest;
+use App\Http\Traits\TeacherTrait;
+use App\Http\Traits\GroupTrait;
 use App\Models\Group;
-use App\Models\Teacher;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-use function Ramsey\Uuid\v1;
 
 class GroupController extends Controller
 {
+    use TeacherTrait;
+    use GroupTrait;
+
+
     public function index()
     {
-        $groups = Group::orderBy('id', 'DESC')->get();
+        $groups = $this->getGroupsDesc();
 
         return view('admin.pages.group.index', [
             'groups' => $groups
@@ -25,7 +28,7 @@ class GroupController extends Controller
 
     public function create()
     {
-        $teachers = Teacher::get();
+        $teachers = $this->getTeachers();
         return view('admin.pages.group.create', [
             'teachers' => $teachers
         ]);
@@ -46,7 +49,7 @@ class GroupController extends Controller
 
     public function edit(Group $group)
     {
-        $teachers = Teacher::get();
+        $teachers = $this->getTeachers();
 
         return view('admin.pages.group.edit', [
             'teachers' => $teachers,
