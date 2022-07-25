@@ -80,7 +80,7 @@ class AttendController extends Controller
             'student_id' => $request->student_id,
             'lesson_id' =>  $request->lesson_id,
             'date' =>  $request->date,
-            'attend' =>  $request->attend == "" ? "0" : "1",
+            'attend' =>  $request->lesson_attend == "" ? "0" : "1",
             'note' =>  $request->note,
         ]);
 

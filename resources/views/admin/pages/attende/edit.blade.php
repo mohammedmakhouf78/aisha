@@ -32,7 +32,7 @@
 
 
 
-                        <x-form.checkbok name="attend" check=" {{ $attend->attend == 1 ? 'checked' : '' }}"
+                        <x-form.checkbok name="lesson_attend" check=" {{ $attend->attend == 1 ? 'checked' : '' }}"
                             label="الحضور" />
 
 
