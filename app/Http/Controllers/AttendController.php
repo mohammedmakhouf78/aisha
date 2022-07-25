@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Attend\AttendDeleteRequest;
 use App\Http\Requests\Attend\AttendStoreRequest;
 use App\Http\Requests\Attend\AttendUpdateRequest;
+use App\Http\Traits\AttendTrait;
+use App\Http\Traits\LessonTrait;
+use App\Http\Traits\StudentTrait;
 use App\Models\Attend;
-use App\Models\Lesson;
-use App\Models\Student;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AttendController extends Controller
 {
+    use AttendTrait;
+    use StudentTrait;
+    use LessonTrait;
 
     public function index()
     {
 
-        $attends = Attend::orderBy('id', 'DESC')->get();
+        $attends = $this->getAttendsDesc();
 
         return view('admin.pages.attende.index', [
             'attends' => $attends
@@ -25,8 +29,8 @@ class AttendController extends Controller
 
     public function create()
     {
-        $students  = Student::get();
-        $lessons = Lesson::get();
+        $students  = $this->getStudents();
+        $lessons = $this->getLessons();
 
         return view('admin.pages.attende.create', [
             'students' => $students,
@@ -39,11 +43,12 @@ class AttendController extends Controller
     {
 
 
+
         Attend::create([
             'student_id' => $request->student_id,
             'lesson_id' =>  $request->lesson_id,
             'date' =>  $request->date,
-            'attend' =>  $request->attend == 1 ? "1" : "0",
+            'attend' =>  $request->attend == "" ? "0" : "1",
             'note' =>  $request->note,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
@@ -53,8 +58,8 @@ class AttendController extends Controller
     public function edit(Attend $attend)
     {
 
-        $students  = Student::get();
-        $lessons = Lesson::get();
+        $students  = $this->getStudents();
+        $lessons = $this->getLessons();
 
 
 
@@ -70,13 +75,15 @@ class AttendController extends Controller
     {
 
 
+
         $attend->update([
             'student_id' => $request->student_id,
             'lesson_id' =>  $request->lesson_id,
             'date' =>  $request->date,
-            'attend' =>  $request->attend == 1 ? "1" : "0",
+            'attend' =>  $request->attend == "" ? "0" : "1",
             'note' =>  $request->note,
         ]);
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.attend.index'));
     }
