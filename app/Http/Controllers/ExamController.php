@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Exam\ExamDeleteRequest;
 use App\Http\Requests\Exam\ExamStoreRequest;
 use App\Http\Requests\Exam\ExamUpdateRequest;
+use App\Http\Traits\ExamTrait;
+use App\Http\Traits\TeacherTrait;
 use App\Models\Exam;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -14,11 +16,22 @@ use App\Http\Traits\TeacherTrait;
 
 class ExamController extends Controller
 {
+<<<<<<< HEAD
     use ExamTrait;
     use TeacherTrait;
     public function index()
     {
         $exams = $this->getExamDesc();
+=======
+use ExamTrait;
+use TeacherTrait;
+
+
+
+    public function index()
+    {
+        $exams = $this->getExamsDesc();
+>>>>>>> 0594cf6fcacf0275a178a147de0de9c81dd630df
         return view('admin.pages.exam.index', [
             'exams' => $exams
         ]);
@@ -26,7 +39,11 @@ class ExamController extends Controller
 
     public function create()
     {
+<<<<<<< HEAD
         $teachers = $this->getTeachers();
+=======
+        $teachers = $this-> getTeachers();
+>>>>>>> 0594cf6fcacf0275a178a147de0de9c81dd630df
         return view('admin.pages.exam.create', [
             'teachers' => $teachers
         ]);
@@ -49,7 +66,11 @@ class ExamController extends Controller
 
     public function edit(Exam $exam)
     {
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> 0594cf6fcacf0275a178a147de0de9c81dd630df
         $teachers = $this->getTeachers();
         return view('admin.pages.exam.edit', [
             'teachers' => $teachers,

@@ -7,11 +7,12 @@
 @section('content')
     <div class="row">
 
+
         <div class="col-md-12">
             <div class="card">
-                <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary">إضافه معلم</a>
                 <div class="card-header">
                     <strong class="card-title">بيانات المعلمين</strong>
+                    <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary float-right">Create</a>
                 </div>
                 <div class="card-body">
                     <div id="bootstrap-data-table_wrapper"

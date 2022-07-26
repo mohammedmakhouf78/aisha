@@ -41,9 +41,6 @@ class AttendController extends Controller
 
     public function store(AttendStoreRequest $request)
     {
-
-
-
         Attend::create([
             'student_id' => $request->student_id,
             'lesson_id' =>  $request->lesson_id,
@@ -57,11 +54,8 @@ class AttendController extends Controller
 
     public function edit(Attend $attend)
     {
-
         $students  = $this->getStudents();
         $lessons = $this->getLessons();
-
-
 
         return view('admin.pages.attende.edit', [
             'students' => $students,
@@ -73,9 +67,6 @@ class AttendController extends Controller
 
     public function update(AttendUpdateRequest $request, Attend $attend)
     {
-
-
-
         $attend->update([
             'student_id' => $request->student_id,
             'lesson_id' =>  $request->lesson_id,
