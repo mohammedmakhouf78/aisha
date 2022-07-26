@@ -12,6 +12,11 @@ trait ExamTrait
     {
         return Exam::orderBy('id', 'DESC')->get();
     }
+
+    private function getExam()
+    {
+        return Exam::get();
+    }
 }
 =======
     private function getExamsDesc()
