@@ -56,8 +56,8 @@ class ExamStudentsController extends Controller
 
     public function edit(ExamStudent $examStudent)
     {
-        $exams = Exam::get();
-        $students = Student::get();
+        $exams = $this->getExam();
+        $students = $this->getStudents();
 
         return view('admin.pages.examstudent.edit', [
             'exams' => $exams,
