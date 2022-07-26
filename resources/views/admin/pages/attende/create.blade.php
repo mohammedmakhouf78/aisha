@@ -23,7 +23,7 @@
                         <x-form.select-object name="lesson_id" label="اختر الدرس" :collection="$lessons" field="name"
                             :selected="old('lesson_id')" />
 
-                        <x-form.date name="date" label=" تاريخ" :value="old('date')" />
+                        <x-form.date name="date" label=" تاريخ" :value="date('Y-m-d')" />
 
 
 

@@ -2,7 +2,7 @@
     <div class="col col-md-6">
         <div class="input-group">
             <div class="input-group-addon">{{ $label }}</div>
-            <input class="mr-4" type="checkbox" {{ $check }} id="{{ $name }}" name="{{ $name }}"
+            <input class="mr-4" type="checkbox" {{ $check ?? '' }} id="{{ $name }}" name="{{ $name }}"
                 value="1">
         </div>
         @error($name)

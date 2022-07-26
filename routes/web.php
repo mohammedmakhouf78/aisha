@@ -29,8 +29,12 @@ Route::group(['prefix' => 'admin','as' => 'admin.'],function(){
     Route::get('loginPage',[AuthController::class,'loginPage'])->name('loginPage');
     Route::post('login',[AuthController::class,'login'])->name('login');
 });
-//,'middleware' => 'auth'
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+Route::get('/', function () {
+    return redirect(route('admin.home'));
+})->name('home');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'middleware' => 'auth'], function () {
 
     Route::get('/', function () {
         return view('admin/master');

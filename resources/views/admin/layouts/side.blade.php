@@ -36,15 +36,16 @@
                           request()->route()->getName() == 'admin.user.edit' ||
                           request()->route()->getName() == 'admin.Payment.edit')
                           <li class="menu-item-has-children dropdown open show">
-                            <i class="fal fa-table"></i>
+                            
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fas fa-table mr-2"></i>
                               الجداول</a>
                               <ul class="sub-menu children dropdown-menu show">
                               @else
                                   <li class="menu-item-has-children dropdown open">
                                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                           aria-expanded="false">
-                                          </i><i class="fas fa-table"></i>الجداول</a>
+                                          </i><i class="fas fa-table mr-2"></i>الجداول</a>
                                       <ul class="sub-menu children dropdown-menu">
                       @endif
                       <li>

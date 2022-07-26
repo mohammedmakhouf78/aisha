@@ -7,8 +7,6 @@ use App\Http\Requests\Lesson\LessonStoreRequest;
 use App\Http\Requests\Lesson\LessonUpdateRequest;
 use App\Models\Group;
 use App\Models\Lesson;
-use Dotenv\Parser\Lexer;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
@@ -18,9 +16,7 @@ class LessonController extends Controller
 
         $lessons = Lesson::orderBy('id', 'DESC')->get();
         return view('admin.pages.lessons.index', [
-
             "lessons"  => $lessons,
-
         ]);
     }
 
@@ -35,10 +31,7 @@ class LessonController extends Controller
 
     public function store(LessonStoreRequest $request)
     {
-
-
         Lesson::create([
-
             'day' =>  $request->day,
             'group_id' => $request->group_id,
             'from' => $request->from,
@@ -62,9 +55,6 @@ class LessonController extends Controller
 
     public function update(LessonUpdateRequest $request, Lesson $lesson)
     {
-
-
-
         $lesson->update([
             'day' =>  $request->day,
             'group_id' => $request->group_id,

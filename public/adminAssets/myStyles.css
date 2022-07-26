@@ -17,3 +17,7 @@
     right: -10px;
     top: -10px;
 }
+
+.navbar .navbar-nav li.menu-item-has-children .sub-menu i{
+    left: 0px !important;
+}
