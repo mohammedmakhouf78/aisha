@@ -10,13 +10,19 @@ use App\Models\Lesson;
 use Dotenv\Parser\Lexer;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Traits\LessonTrait;
+use App\Http\Traits\GroupTrait;
 
 class LessonController extends Controller
 {
+
+    use LessonTrait;
+    use GroupTrait;
+
     public function index()
     {
 
-        $lessons = Lesson::orderBy('id', 'DESC')->get();
+        $lessons = $this-> getLessonsDesc();
         return view('admin.pages.lessons.index', [
 
             "lessons"  => $lessons,
@@ -27,7 +33,7 @@ class LessonController extends Controller
     public function create()
     {
 
-        $groups = Group::get();
+        $groups = $this->getGroups();
         return view('admin.pages.lessons.create', [
             'groups' =>  $groups
         ]);
@@ -52,7 +58,7 @@ class LessonController extends Controller
     public function edit(Lesson $lesson)
     {
 
-        $groups = Group::get();
+        $groups = $this->getGroups;
 
         return view('admin.pages.lessons.edit', [
             'groups' => $groups,

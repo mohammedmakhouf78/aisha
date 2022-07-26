@@ -9,12 +9,19 @@ use App\Models\Exam;
 use App\Models\ExamStudent;
 use App\Models\Student;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Traits\ExamStudentTraits;
+use App\Http\Traits\StudentTrait;
+use App\Http\Traits\ExamTrait;
+use phpDocumentor\Reflection\Types\This;
 
 class ExamStudentsController extends Controller
 {
+    use ExamStudentTraits;
+    use StudentTrait;
+    use ExamTrait;
     public function index()
     {
-        $examstudents = ExamStudent::orderBy('id', 'DESC')->get();
+        $examstudents = $this->getExamStudentDesc();
 
         return view('admin.pages.examstudent.index', [
             'examstudents' => $examstudents
@@ -23,8 +30,8 @@ class ExamStudentsController extends Controller
 
     public function create()
     {
-        $students = Student::get();
-        $exams = Exam::get();
+        $students = $this->getStudents();
+        $exams = $this->getExamDesc();
 
         return view('admin.pages.examstudent.create', [
             'students' => $students,

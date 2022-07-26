@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => 'auth'], fun
     })->name('home');
 
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
-    
+
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.'], function () {
         Route::get('', [TeacherController::class, 'index'])->name('index');
         Route::get('/create', [TeacherController::class, 'create'])->name('create');

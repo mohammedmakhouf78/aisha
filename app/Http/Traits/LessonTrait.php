@@ -11,4 +11,8 @@ trait LessonTrait
     {
         return Lesson::get();
     }
+    private function getLessonsDesc()
+    {
+        return Lesson::orderBy('id', 'DESC')->get();
+    }
 }

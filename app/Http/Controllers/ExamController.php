@@ -9,12 +9,16 @@ use App\Models\Exam;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Traits\ExamTrait;
+use App\Http\Traits\TeacherTrait;
 
 class ExamController extends Controller
 {
+    use ExamTrait;
+    use TeacherTrait;
     public function index()
     {
-        $exams = Exam::orderBy('id', 'DESC')->get();
+        $exams = $this->getExamDesc();
         return view('admin.pages.exam.index', [
             'exams' => $exams
         ]);
@@ -22,7 +26,7 @@ class ExamController extends Controller
 
     public function create()
     {
-        $teachers = Teacher::get();
+        $teachers = $this->getTeachers();
         return view('admin.pages.exam.create', [
             'teachers' => $teachers
         ]);
@@ -45,8 +49,8 @@ class ExamController extends Controller
 
     public function edit(Exam $exam)
     {
-       
-        $teachers = Teacher::get();
+
+        $teachers = $this->getTeachers();
         return view('admin.pages.exam.edit', [
             'teachers' => $teachers,
             'exam' => $exam
@@ -55,7 +59,7 @@ class ExamController extends Controller
 
     public function update(ExamUpdateRequest $request , Exam $exam)
     {
-    
+
         $exam->update([
             'teacher' => $request->teacher_name,
             'title' => $request->title,
@@ -71,7 +75,7 @@ class ExamController extends Controller
     public function delete(ExamDeleteRequest $request , Exam $exam)
     {
 
-       
+
 
         $exam->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');
