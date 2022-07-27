@@ -24,7 +24,7 @@ class ExamStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'teacher_name' => 'required|exists:teachers,teacher',
+            'teacher_id' => 'required|exists:teachers,id',
             'title' => 'required|min:11',
             'max_mark' => 'required|numeric',
             'min_mark' => 'required|numeric',

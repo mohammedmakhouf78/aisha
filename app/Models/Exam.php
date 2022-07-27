@@ -10,10 +10,16 @@ class Exam extends Model
     use HasFactory;
 
     protected $fillable = [
-        'teacher',
+
         'title',
         'max_mark',
         'min_mark',
-        'note'
+        'note',
+        'teacher_id'
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
+    }
 }

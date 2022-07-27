@@ -10,13 +10,13 @@
                 <div class="card-header bg-primary text-light" style="text-align: right">
                     الاختبار </div>
                 <div class="card-body card-block">
-                    <form action="{{ route('admin.exam.update',$exam->id) }}" method="post" class="form-horizontal">
+                    <form action="{{ route('admin.exam.update', $exam->id) }}" method="post" class="form-horizontal">
                         @csrf
                         @method('PUT')
 
 
-                        <x-form.select-object name="teacher_name" label="اختر المعلم" :collection="$teachers" field="name"
-                            :selected="$exam->id" />
+                        <x-form.select-object name="teacher_id" label="اختر المعلم" :collection="$teachers" field="name"
+                            :selected="$exam->teacher_id" />
 
 
                         <input type="hidden" name="exam_id" value="{{ $exam->id }}">

@@ -14,22 +14,24 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ExamController extends Controller
 {
-use ExamTrait;
-use TeacherTrait;
+    use ExamTrait;
+    use TeacherTrait;
 
 
 
     public function index()
     {
+        $teachers = $this->getTeachers();
         $exams = $this->getExamsDesc();
         return view('admin.pages.exam.index', [
-            'exams' => $exams
+            'exams' => $exams,
+            'teachers' => $teachers
         ]);
     }
 
     public function create()
     {
-        $teachers = $this-> getTeachers();
+        $teachers = $this->getTeachers();
         return view('admin.pages.exam.create', [
             'teachers' => $teachers
         ]);
@@ -39,7 +41,7 @@ use TeacherTrait;
     {
 
         Exam::create([
-            'teacher' => $request->teacher_name,
+            'teacher_id' => $request->teacher_id,
             'title' => $request->title,
             'max_mark' => $request->max_mark,
             'min_mark' => $request->min_mark,
@@ -52,7 +54,7 @@ use TeacherTrait;
 
     public function edit(Exam $exam)
     {
-       
+
         $teachers = $this->getTeachers();
         return view('admin.pages.exam.edit', [
             'teachers' => $teachers,
@@ -60,11 +62,11 @@ use TeacherTrait;
         ]);
     }
 
-    public function update(ExamUpdateRequest $request , Exam $exam)
+    public function update(ExamUpdateRequest $request, Exam $exam)
     {
-    
+
         $exam->update([
-            'teacher' => $request->teacher_name,
+            'teacher_id' => $request->teacher_id,
             'title' => $request->title,
             'max_mark' => $request->max_mark,
             'min_mark' => $request->min_mark,
@@ -75,10 +77,10 @@ use TeacherTrait;
         return redirect(route('admin.exam.index'));
     }
 
-    public function delete(ExamDeleteRequest $request , Exam $exam)
+    public function delete(ExamDeleteRequest $request, Exam $exam)
     {
 
-       
+
 
         $exam->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');

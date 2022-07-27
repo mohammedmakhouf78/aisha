@@ -14,8 +14,8 @@
                         @csrf
 
 
-                        <x-form.select-object name="teacher_name" label="اختر المعلم" :collection="$teachers" field="name"
-                            :selected="old('teacher_name')" />
+                        <x-form.select-object name="teacher_id" label="اختر المعلم" :collection="$teachers" field="name"
+                            :selected="old('teacher_id')" />
 
 
 

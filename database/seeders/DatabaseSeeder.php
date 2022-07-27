@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
-        $teachers = Teacher::factory(10)->create()->each(function ($teacher){
+        $teachers = Teacher::factory(10)->create()->each(function ($teacher) {
             Group::factory(3)->create([
                 'teacher_id' => $teacher->id
             ]);
         });
-        
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

@@ -61,7 +61,7 @@
                                         @foreach ($exams as $index => $exam)
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1">{{ ++$index }}</td>
-                                                <td>{{ $exam->teacher }}</td>
+                                                <td>{{ $exam->teacher->name }}</td>
                                                 <td>{{ $exam->title }}</td>
                                                 <td>{{ $exam->max_mark }}</td>
                                                 <td>{{ $exam->min_mark }}</td>
@@ -70,7 +70,7 @@
                                                     <x-action.edit :route="route('admin.exam.edit', $exam->id)" />
                                                 </td>
                                                 <td>
-                                                    <x-action.delete :value="$exam->id" :route="route('admin.exam.delete',$exam->id)" />
+                                                    <x-action.delete :value="$exam->id" :route="route('admin.exam.delete', $exam->id)" />
                                                 </td>
                                             </tr>
                                         @endforeach

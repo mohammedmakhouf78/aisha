@@ -15,12 +15,18 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
-            $table->string("teacher");
+            $table->unsignedBigInteger("teacher_id");
             $table->string("title");
             $table->float("max_mark");
             $table->float("min_mark");
             $table->text("note")->nullable();
             $table->timestamps();
+
+
+            $table->foreign('teacher_id')
+                ->references('id')
+                ->on('teachers')
+                ->onDelete('CASCADE');
         });
     }
 
